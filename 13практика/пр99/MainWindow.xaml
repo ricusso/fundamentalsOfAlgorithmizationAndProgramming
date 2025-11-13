@@ -1,0 +1,72 @@
+﻿<Window x:Class="np9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Текстовый редактор с форматированием" Height="550" Width="800"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style x:Key="MenuStyle" TargetType="MenuItem">
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+     
+        <Menu Grid.Row="0" Background="White">
+            <MenuItem Header="Файл" Style="{StaticResource MenuStyle}">
+                <MenuItem Header="Открыть" Click="открытьToolStripMenuItem_Click"/>
+                <MenuItem Header="Сохранить как" Click="сохранитьКакToolStripMenuItem_Click"/>
+                <Separator/>
+                <MenuItem Header="Выход" Click="выходToolStripMenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="Формат" Style="{StaticResource MenuStyle}">
+                <MenuItem Header="Шрифт" Click="шрифтToolStripMenuItem_Click"/>
+                <MenuItem Header="Цвет текста" Click="цветТекстаToolStripMenuItem_Click"/>
+                <MenuItem Header="Цвет фона" Click="цветФонаToolStripMenuItem_Click"/>
+                <Separator/>
+                <MenuItem Header="Полужирный" Click="полужирныйToolStripMenuItem_Click"/>
+                <MenuItem Header="Курсив" Click="курсивToolStripMenuItem_Click"/>
+                <MenuItem Header="Подчеркнутый" Click="подчеркнутыйToolStripMenuItem_Click"/>
+            </MenuItem>
+        </Menu>
+
+      
+        <ToolBar Grid.Row="1" Background="LightGray" Margin="0,2">
+            <ComboBox x:Name="fontComboBox" Width="120" SelectionChanged="fontComboBox_SelectionChanged"
+                      ToolTip="Выберите шрифт"/>
+            <ComboBox x:Name="fontSizeComboBox" Width="50" SelectionChanged="fontSizeComboBox_SelectionChanged"
+                      ToolTip="Выберите размер шрифта"/>
+            <Separator/>
+            <Button Content="Ж" FontWeight="Bold" Click="boldButton_Click" 
+                    ToolTip="Полужирный" Width="30"/>
+            <Button Content="К" FontStyle="Italic" Click="italicButton_Click" 
+                    ToolTip="Курсив" Width="30"/>
+            <Button x:Name="underlineButton" Content="Ч" Click="underlineButton_Click" 
+                    ToolTip="Подчеркнутый" Width="30">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="Ч" TextDecorations="Underline"/>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Separator/>
+            <Button x:Name="textColorButton" Content="Цвет текста" Click="textColorButton_Click"
+                    ToolTip="Изменить цвет текста"/>
+            <Button x:Name="bgColorButton" Content="Цвет фона" Click="bgColorButton_Click"
+                    ToolTip="Изменить цвет фона"/>
+        </ToolBar>
+
+        <RichTextBox x:Name="richTextBox" 
+                     Grid.Row="2" 
+                     Margin="10,5,10,10"
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Auto"
+                     Background="White"/>
+    </Grid>
+</Window>
